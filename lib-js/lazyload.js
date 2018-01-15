@@ -36,9 +36,17 @@ LazyLoad.css('foo.css', function () {
  JavaScript or CSS files on demand either during or after the rendering of a web
  page.
 
+ lazyload使得它很容易和无痛懒洋洋地加载一个或多个外部
+ 在Web呈现过程中或之后的点播或JavaScript文件
+ 页。
+
  Supported browsers include Firefox 2+, IE6+, Safari 3+ (including Mobile
  Safari), Google Chrome, and Opera 9+. Other browsers may or may not work and
  are not officially supported.
+
+ 支持的浏览器包括Firefox 2 +，ie6+，Safari 3 +（包括莫比尔
+ Safari），谷歌浏览器和Opera 9 +。其他浏览器可能工作，也可能不工作。
+ 没有正式支持。
 
  Visit https://github.com/rgrove/lazyload/ for more info.
 
@@ -52,8 +60,18 @@ LazyLoad.css('foo.css', function () {
  the Software, and to permit persons to whom the Software is furnished to do so,
  subject to the following conditions:
 
+ 冰将权限授予自由电荷，任何人获得一份
+ 本软件和相关文件档案（“软件”），在两个交易
+ 没有限制的软件，包括两个没有限制的权利
+ 使用，复制，修改，MERGE，出版，distribute，许可，和/或销售部的副本
+ 《软件许可证和两人的两个谁的软件furnished冰做的婊子
+ 受以下条件：
+
  The above copyright notice and this permission notice shall be included in all
  copies or substantial portions of the Software.
+
+ 上述版权通知及本许可通知应包括在所有
+ 软件的副本或实质部分。
 
  THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
@@ -61,6 +79,14 @@ LazyLoad.css('foo.css', function () {
  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+ 该软件提供的'是'，没有任何形式的保证，快递或
+ 暗示的，包括但不限于适销性的保证，健身
+ 为特定目的和不侵权。无论如何，作者或
+ 版权人对任何索赔、损害赔偿或其他责任承担责任，是否
+ 在合同、侵权或其他行为中，由、出于或在
+ 与软件或软件中的使用或其他交易有关。
 
  @module lazyload
  @class LazyLoad
@@ -71,28 +97,36 @@ LazyLoad = (function (doc) {
     // -- Private Variables ------------------------------------------------------
 
     // User agent and feature test information.
+    // 用户代理和特征测试信息。
     var env,
 
         // Reference to the <head> element (populated lazily).
         head,
 
         // Requests currently in progress, if any.
+        // 正在进行中的请求，如果有的话。
         pending = {},
 
         // Number of times we've polled to check whether a pending stylesheet has
         // finished loading. If this gets too high, we're probably stalled.
+
+        // 我们调查，检查是否有挂起的样式表有次数
+        // 装完。如果这太高了，我们可能会停滞不前。
+
         pollCount = 0,
 
         // Queued requests.
         queue = {css: [], js: []},
 
         // Reference to the browser's list of stylesheets.
+        // 引用样式表的浏览器的列表。
         styleSheets = doc.styleSheets;
 
     // -- Private Methods --------------------------------------------------------
 
     /**
      Creates and returns an HTML element with the specified name and attributes.
+     创建并返回具有指定名称和属性的HTML元素。
 
      @method createNode
      @param {String} name element name
@@ -117,6 +151,10 @@ LazyLoad = (function (doc) {
      loading. Executes the associated callback (if any) and loads the next
      resource in the queue.
 
+     当指定类型的当前挂起资源完成时调用。
+     加载.执行关联回调（如果有的话）并加载下一个回调函数。
+     队列中的资源。
+
      @method finish
      @param {String} type resource type ('css' or 'js')
      @private
@@ -135,6 +173,8 @@ LazyLoad = (function (doc) {
 
             // If this is the last of the pending URLs, execute the callback and
             // start the next request in the queue (if any).
+            // 如果这是最后一个挂起的URL，执行回调和
+            // 启动队列中的下一个请求（如果有的话）。
             if (!urls.length) {
                 callback && callback.call(p.context, p.obj);
                 pending[type] = null;
@@ -160,6 +200,7 @@ LazyLoad = (function (doc) {
             async: doc.createElement('script').async === true
         };
 
+        // 查看当前是哪个浏览器
         (env.webkit = /AppleWebKit\//.test(ua))
         || (env.ie = /MSIE|Trident/.test(ua))
         || (env.opera = /Opera/.test(ua))
@@ -173,11 +214,22 @@ LazyLoad = (function (doc) {
      type is already being loaded, the new request will be queued until the
      first request has been finished.
 
+     加载指定的资源或指定类型的下一个资源。
+     如果没有指定资源，则在队列中。如果指定的资源
+     类型已经加载，新的请求将被排队直到
+     第一个请求已经完成。
+
      When an array of resource URLs is specified, those URLs will be loaded in
      parallel if it is possible to do so while preserving execution order. All
      browsers support parallel loading of CSS, but only Firefox and Opera
      support parallel loading of scripts. In other browsers, scripts will be
      queued and loaded one at a time to ensure correct execution order.
+
+     当指定资源URL数组时，将加载这些URL。
+     并行，如果可以这样做，同时保留执行顺序。所有
+     浏览器支持CSS的并行加载，但只有Firefox和Opera。
+     支持脚本的并行加载。在其他浏览器中，脚本将是
+     每次排队并加载一个，以确保正确的执行顺序。
 
      @method load
      @param {String} type resource type ('css' or 'js')
