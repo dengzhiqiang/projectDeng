@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body, a {
+            background: #000;
+            font-size: 18px;
+            color: deeppink;
+        }
+    </style>
+</head>
+<body>
+<div id="box">1</div>
+<div>1</div>
+<div class="wrapper">1</div>
+<div class="wrapper">1</div>
+
+
+<script src="../../1-mui.js"></script>
+<script>
+    console.log($.qsa('body'));
+    console.log($.qsa('#box'));
+</script>
+</body>
+</html>
